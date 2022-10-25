@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapibackend-deployment
+  labels:
+    app: webapibackend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: webapibackend
+  template:
+    metadata:
+      labels:
+        app: webapibackend
+    spec:
+      containers:
+      - name: webapibackend
+        image: acregistrybk.azurecr.io/webapibackend:v1
+        ports:
+        - containerPort: 5285
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapibackend
+spec:
+  selector:
+    app: webapibackend
+  ports:
+    - protocol: TCP
+      port: 5285
+      targetPort: 5285
