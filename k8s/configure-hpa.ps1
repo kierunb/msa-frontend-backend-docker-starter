@@ -1,0 +1,1 @@
+kubectl autoscale deployment razorfrontend-deployment --cpu-percent=70 --min=2 --max=4

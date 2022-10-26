@@ -19,6 +19,17 @@ spec:
         image: acregistrybk.azurecr.io/webapibackend:v1
         ports:
         - containerPort: 5285
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "125m"
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+        livenessProbe:
+          httpGet:
+            path: /weatherforecast
+            port: 5285
 
 ---
 

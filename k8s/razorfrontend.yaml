@@ -19,6 +19,17 @@ spec:
         image: acregistrybk.azurecr.io/razorfrontend:v1
         ports:
         - containerPort: 5202
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "125m"
+          limits:
+            memory: "128Mi"
+            cpu: "250m"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 5202
 
 ---
 
