@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: razorfrontend-deployment
+  labels:
+    app: razorfrontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: razorfrontend
+  template:
+    metadata:
+      labels:
+        app: razorfrontend
+    spec:
+      containers:
+      - name: razorfrontend
+        image: acregistrybk.azurecr.io/razorfrontend:v1
+        ports:
+        - containerPort: 5202
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: razorfrontend
+spec:
+  selector:
+    app: razorfrontend
+  # expose to internet, access via ExternalIP:port
+  # type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 5202
+      targetPort: 5202
